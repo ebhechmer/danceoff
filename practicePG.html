@@ -1,38 +1,47 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
+
 <link rel="stylesheet" href="mit.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <title>practice</title>
-  
+<title>
+	Dance Off!
+</title>
 </head>
-  
-<body>
-  <h1>practice!</h1>
-  
-  <form>
-    <fieldset>
-    <p>
-      <label>Upload your MP4 files here</label>
-      <input>type = "file" id="fileInput" />
-      <script>
-        const var practiceVid = document.getElementById("fileInput");
-      </script>
-    </p>
-    <p>
-      <label>What is your name?</label>
-      <input> type = "userName" id="name" />
-      <script>
-        var userName = document.getElementById("name");
-      </script>
-    </fieldset>
-  </form>
-  
-  <video width="320" heigh="240" controls>
-    <source src="fileInput" type="video/mp4">
-    //^^ that is probably incorrect
-  </video>
-  
-  //take video file, show it on screen implement watching code and webcam code also display name
-  
+
+
+<body id="practicemode">
+<h1>Practice Mode</h1>
+
+ <h3>Here you can practice your dancing by yourself. Use this space <br>to improve and practice so you can beat your friends!</h3>
+<h3><pre>     Your Video                Dance Tutorial     </pre></h3>
+
+<video autoplay="true" id="videoElement">
+
+</video>
+
+
+
+<iframe width="900" height="900" 
+src="https://www.youtube.com/embed/HJljPn1589Q">
+</iframe>
+
+
+
+<script>
+var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+</script>
+
+</body>
+</html>
