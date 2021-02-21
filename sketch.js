@@ -142,6 +142,7 @@ let skeleton;
 var time;
 
 function setup() {
+  // get a video from noah's website to process for posenet
   createCanvas(640, 480);
   myVideo = createCapture(VIDEO);
   myVideo.hide();
