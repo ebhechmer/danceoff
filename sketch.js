@@ -1,192 +1,66 @@
-// let video;
-// let poseNet;
-// let pose;
-// let skeleton;
 
-// //var time;
-
-// function setup() {
-//   createCanvas(640, 480);
-//   // var vid2 = getVideoFromFile();
-
-//   webout = createCapture(VIDEO);
-//   webout.size(640, 480)
-
-//   var options = {
-//     imageScaleFactor: 0.3,
-//     outputStride: 16,
-//     flipHorizontal: false,
-//     minConfidence: 0.5,
-//     maxPoseDetections: 5,
-//     scoreThreshold: 0.5,
-//     nmsRadius: 20,
-//     detectionType: 'multiple',
-//     multiplier: 0.75,
-//    };
-
-//   poseNet = ml5.poseNet(webout, options, modelLoaded);
-//   poseNet.on('pose', getPoses);
-  
-//   poseNet = ml5.poseNet(myVideo, options, modelLoaded);
-//   poseNet.on('pose', getPoses);
-// }
-// function draw() {
-//   image(myVideo, 0, 0);
-
-//   if (pose) {
-//     for (let i = 5; i < pose.keypoints.length; i++) {
-//       let x = pose.keypoints[i].position.x;
-//       let y = pose.keypoints[i].position.y;
-//       fill(0,255,0);
-//       ellipse(x,y,8,8);
-      
-//     }
-    
-//     for (let i = 0; i < skeleton.length; i++) {
-//       let a = skeleton[i][0];
-//       let b = skeleton[i][1];
-//       strokeWeight(2);
-//       stroke(255);
-//       line(a.position.x, a.position.y,b.position.x,b.position.y);
-//     }
-//   }
-// }
-
-// function getVideoFromFile(video) {
-//   return document.getElementById('input').files[0]; // change the tag for the video
-// }
-
-// function getPoses(poses) {
-//   console.log(poses);
-//   if (poses.length > 0) {
-//     pose = poses[0].pose;
-//     skeleton = poses[0].skeleton;
-//   }
-// }
-
-
-// function modelLoaded() {
-//   console.log('Drawing model..');
-// }
-
-
-
-
-// fs.readFile(__dirname + '/assets/frames/my_frame_1521406229879_1920x1080_1.jpg', function(err, image){
-//   socket.emit('image', { image: true, buffer: image });
-//   });
-
-// function something() {
-//   try {
-//     var process = new ffmpeg(__dirname + '/assets/sample.mp4'); // use your own video file here
-//     process.then(function (video) {
-//       // Callback mode
-//       video.fnExtractFrameToJPG(__dirname + '/assets/frames/', {
-//         frame_rate: 1,
-//         number: null, //capture total frame
-//         file_name: 'my_frame_%t_%s'
-//       }, function (error, files) {
-//         if (!error)
-//           console.log('Frames: ' + files);
-//       });
-//     }, function (err) {
-//       console.log('Error: ' + err);
-//     });
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
-
-
-// function drawKeypoints()  {
-//   // Loop through all the poses detected
-//   for (let i = 0; i < poses.length; i++) {
-//     // For each pose detected, loop through all the keypoints
-//     let pose = poses[i].pose;
-//     for (let j = 0; j < pose.keypoints.length; j++) {
-//       // A keypoint is an object describing a body part (like rightArm or leftShoulder)
-//       let keypoint = pose.keypoints[j];
-//       // Only draw an ellipse is the pose probability is bigger than 0.2
-//       if (keypoint.score > 0.2) {
-//         fill(255, 0, 0);
-//         noStroke();
-//         ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
-//       }
-//     }
-//   }
-// }
-
-// function drawSkeleton() {
-//   // Loop through all the skeletons detected
-//   for (let i = 0; i < poses.length; i++) {
-//     let skeleton = poses[i].skeleton;
-//     // For every skeleton, loop through all body connections
-//     for (let j = 0; j < skeleton.length; j++) {
-//       let partA = skeleton[j][0];
-//       let partB = skeleton[j][1];
-//       stroke(255, 0, 0);
-//       line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
-//     }
-//   }
-// }
-
-// function accuracyTrack() {
-//     //pose.keypoints.[i].score;
-//   }
 let video;
 let poseNet;
-let pose;
-let skeleton;
-
-var time;
+let poses = [];
 
 function setup() {
-  // get a video from noah's website to process for posenet
   createCanvas(640, 480);
-  myVideo = createCapture(VIDEO);
-  myVideo.hide();
-  poseNet = ml5.poseNet(myVideo, modelLoaded);
-  poseNet.on('pose', gotPoses);
+  video = createCapture(VIDEO);
+  video.size(width, height);
 
+  // Create a new poseNet method with a single detection
+  poseNet = ml5.poseNet(video, modelReady);
+  // This sets up an event that fills the global variable "poses"
+  // with an array every time new poses are detected
+  poseNet.on('pose', function(results) {
+    poses = results;
+  });
+  // Hide the video element, and just show the canvas
+  video.hide();
 }
 
-function gotPoses(poses) {
-  console.log(poses);
-  console.log(poses.length);
-  if (poses.length > 0) {
-    pose = poses[0].pose;
-    skeleton = poses[0].skeleton;
-  }
-}
-
-function modelLoaded() {
-  console.log('Drawing model..');
-}
-
-function processVideo(othervideo) {
-  // cv2.VideoCapture("")
-  // returns keypoints of other video
+function modelReady() {
+  console.log('ready');
 }
 
 function draw() {
-  image(myVideo, 0, 0);
+  image(video, 0, 0, width, height);
 
-  if (pose) {
-    for (let i = 5; i < pose.keypoints.length; i++) {
-      let x = pose.keypoints[i].position.x;
-      let y = pose.keypoints[i].position.y;
-      fill(0,255,0);
-      ellipse(x,y,8,8);
-      
+  // We can call both functions to draw all keypoints and the skeletons
+  drawKeypoints();
+  drawSkeleton();
+}
+
+// A function to draw ellipses over the detected keypoints
+function drawKeypoints()  {
+  // Loop through all the poses detected
+  for (let i = 0; i < poses.length; i++) {
+    // For each pose detected, loop through all the keypoints
+    let pose = poses[i].pose;
+    for (let j = 0; j < pose.keypoints.length; j++) {
+      // A keypoint is an object describing a body part (like rightArm or leftShoulder)
+      let keypoint = pose.keypoints[j];
+      // Only draw an ellipse is the pose probability is bigger than 0.2
+      if (keypoint.score > 0.2) {
+        fill(255, 0, 0);
+        noStroke();
+        ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
+      }
     }
-    
-    for (let i = 0; i < skeleton.length; i++) {
-      let a = skeleton[i][0];
-      let b = skeleton[i][1];
-      strokeWeight(2);
-      stroke(255);
-      line(a.position.x, a.position.y,b.position.x,b.position.y);
+  }
+}
+
+// A function to draw the skeletons
+function drawSkeleton() {
+  // Loop through all the skeletons detected
+  for (let i = 0; i < poses.length; i++) {
+    let skeleton = poses[i].skeleton;
+    // For every skeleton, loop through all body connections
+    for (let j = 0; j < skeleton.length; j++) {
+      let partA = skeleton[j][0];
+      let partB = skeleton[j][1];
+      stroke(255, 0, 0);
+      line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
     }
   }
 }
@@ -217,32 +91,6 @@ function L2Normalization(vec) {
   }
   final[51] = confidencesum;
   
-  // for (var i = 0; i < vec.length; ++i) {
-    // let final = Array(52);
-    // var norm;
-    // keypoints = vec[i].pose.keypoints;
-    
-    // keypoints.sort(function (a,b) {
-    //   a = a.part.toLowerCase();
-    //   b = b.part.toLowerCase();
-    //   return (a < b) ? -1 : (a > b) ? 1 : 0;
-    // })
-    // let arr = Array(34);
-    // for (let j = 0; j < keypoints.length; ++j) {
-    //   arr[j] = keypoints[j].position.x;
-    //   arr[j+1] = keypoints[j].position.y;
-    // }
-    // norm = math.norm(arr);
-    // var confidencesum = 0;
-    // for (let j = 0; j < keypoints.length; ++j) {
-    //   final[j] = keypoints[j].position.x / norm;
-    //   final[j+1] = keypoints[j].position.y / norm;
-    //   final[34 + j] = keypoints[j].score;
-    //   confidencesum += keypoints[j].score;
-    // }
-    // final[51] = confidencesum;
-  // }
-
   return final;
 }
 
@@ -272,3 +120,37 @@ function weightedDistanceMatching(poseVector1, poseVector2) {
 
   return summation1 * summation2;
 }
+
+// var leftBuffer;
+// var rightBuffer;
+
+// function setup() {
+//     // 800 x 400 (double width to make room for each "sub-canvas")
+//     createCanvas(800, 400);
+//     // Create both of your off-screen graphics buffers
+//     leftBuffer = createGraphics(400, 400);
+//     rightBuffer = createGraphics(400, 400);
+// }
+
+// function draw() {
+//     // Draw on your buffers however you like
+//     drawLeftBuffer();
+//     drawRightBuffer();
+//     // Paint the off-screen buffers onto the main canvas
+//     image(leftBuffer, 0, 0);
+//     image(rightBuffer, 400, 0);
+// }
+
+// function drawLeftBuffer() {
+//     leftBuffer.background(0, 0, 0);
+//     leftBuffer.fill(255, 255, 255);
+//     leftBuffer.textSize(32);
+//     leftBuffer.text("This is the left buffer!", 50, 50);
+// }
+
+// function drawRightBuffer() {
+//     rightBuffer.background(255, 100, 255);
+//     rightBuffer.fill(0, 0, 0);
+//     rightBuffer.textSize(32);
+//     rightBuffer.text("This is the right buffer!", 50, 50);
+// }
