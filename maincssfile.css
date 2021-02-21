@@ -20,7 +20,7 @@ h1 {
 
 .button {
 	    color: white;
-	    background-color:#33ffff;
+	    background-color:#a64dff;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -34,7 +34,7 @@ h1 {
 
 .button:hover, .button:active {
 	                           color: white;
-	                           background-color:#00cccc;
+	                           background-color:#cc99ff;
 	                           border: none;
 	                           color: white;
 	                           padding: 15px 32px;
@@ -45,4 +45,6 @@ h1 {
 	                           margin: 4px 2px;
 	                           cursor: pointer;
 }
+	                         
+`
 	                         
