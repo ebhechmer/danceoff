@@ -22,16 +22,20 @@
 
  <h3>Here you can practice your dancing by yourself. Use this space <br>to improve and practice so you can beat your friends!</h3>
 <h3><pre>     Your Video                Dance Tutorial     </pre></h3>
-
-<video autoplay="true" id="#videoElement">
-
-</video>
-
-
-
-<iframe width="900" height="900" 
-src="https://www.youtube.com/embed/HJljPn1589Q">
-</iframe>
+<style>
+  #videoElement2 {
+    background-color: #666;
+    float: right;
+  }
+  </style>
+    <div id= "videoElement" width='640', height='480'>
+      <script src="sketch.js"></script>
+    </div>
+    <video id='videoElement2' src="shuffling.mp4" width="640" height="480" autoplay=true></video>
+      <!-- <iframe width="640" height="480" id='videoElement2'
+        src="https://www.youtube.com/embed/HJljPn1589Q">
+        </iframe> -->
+    
 
 
 
@@ -48,27 +52,5 @@ if (navigator.mediaDevices.getUserMedia) {
     });
 }
 </script> -->
-
-<script src="sketch.js"></script>
-  <style>
-    #container {
-      margin: 0px auto;
-      width: 1000px;
-      height: 375px;
-    }
-    #videoElement {
-      width: 500px;
-      height: 375px;
-      background-color: #666;
-      float: left; 
-    }
-    #videoElement2 {
-      width: 500px;
-      height: 375px;
-      background-color: #666;
-      float: right; 
-    }
-
-    </style>
 </body>
 </html>
