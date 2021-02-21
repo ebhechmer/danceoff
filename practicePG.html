@@ -14,7 +14,7 @@
   <form>
     <fieldset>
     <p>
-      <label>Upload your files here</label>
+      <label>Upload your MP4 files here</label>
       <input>type = "file" id="fileInput" />
     </p>
     <p>
@@ -25,6 +25,11 @@
       </script>
     </fieldset>
   </form>
+  
+  <video width="320" heigh="240" controls>
+    <source src="fileInput" type="video/mp4">
+    //^^ that is probably incorrect
+  </video>
   
   //take video file, show it on screen implement watching code and webcam code also display name
   
