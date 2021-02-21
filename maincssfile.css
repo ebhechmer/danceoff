@@ -11,3 +11,38 @@
   
   
 }
+
+h1 {
+   color: white;
+   text-align: center;
+   font-family:  "Times New Roman", Times, serif;
+}
+
+.button {
+	    color: white;
+	    background-color:#33ffff;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+}
+
+.button:hover, .button:active {
+	                           color: white;
+	                           background-color:#00cccc;
+	                           border: none;
+	                           color: white;
+	                           padding: 15px 32px;
+	                           text-align: center;
+	                           text-decoration: none;
+	                           display: inline-block;
+ 	                           font-size: 16px;
+	                           margin: 4px 2px;
+	                           cursor: pointer;
+}
+	                         
