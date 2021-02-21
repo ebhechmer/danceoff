@@ -38,7 +38,7 @@ h3 {
 }
 	                         
 #homescreen {
-	  background-image: url(https://github.com/ebhechmer/danceoff/blob/main/background.png);
+	  background-image: url(https://raw.githubusercontent.com/ebhechmer/danceoff/main/background.png);
 	  background-size: cover;
       background-position:50% 50%;
 	  background-repeat: no-repeat;
@@ -46,7 +46,7 @@ h3 {
 }
 
 #practicemode {
-	  background-image: url(https://github.com/ebhechmer/danceoff/blob/main/transparentbackground.png);
+	  background-image: url(https://raw.githubusercontent.com/ebhechmer/danceoff/main/transparentbackground.png);
       background-position:50% 50%;
 	  background-repeat: no-repeat;
       background-attachment: fixed;
