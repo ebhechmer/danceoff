@@ -192,31 +192,58 @@ function draw() {
 
 function L2Normalization(vec) {
   console.log(vec);
-  let final = Array(51);
-  for (var i = 0; i < vec.length; ++i) {
-    var norm;
-    keypoints = vec[i].pose.keypoints;
-    
-    keypoints.sort(function (a,b) {
-      a = a.part.toLowerCase();
-      b = b.part.toLowerCase();
-      return (a < b) ? -1 : (a > b) ? 1 : 0;
-    })
-    let arr = Array(34);
-    norm = math.norm(arr);
-    for (let j = 0; j < keypoints.length; ++j) {
-      arr[j] = position.x;
-      arr[j+1] = position.y;
-      final[i] = position.x;
-      final[i + 1] = position.y;
-    }
-
+  let final = Array(52);
+  var norm;
+  keypoints = vec[0].pose.keypoints;
+  
+  keypoints.sort(function (a,b) {
+    a = a.part.toLowerCase();
+    b = b.part.toLowerCase();
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
+  })
+  let arr = Array(34);
+  for (let j = 0; j < keypoints.length; ++j) {
+    arr[j] = keypoints[j].position.x;
+    arr[j+1] = keypoints[j].position.y;
   }
+  norm = math.norm(arr);
+  var confidencesum = 0;
+  for (let j = 0; j < keypoints.length; ++j) {
+    final[j] = keypoints[j].position.x / norm;
+    final[j+1] = keypoints[j].position.y / norm;
+    final[34 + j] = keypoints[j].score;
+    confidencesum += keypoints[j].score;
+  }
+  final[51] = confidencesum;
+  
+  // for (var i = 0; i < vec.length; ++i) {
+    // let final = Array(52);
+    // var norm;
+    // keypoints = vec[i].pose.keypoints;
+    
+    // keypoints.sort(function (a,b) {
+    //   a = a.part.toLowerCase();
+    //   b = b.part.toLowerCase();
+    //   return (a < b) ? -1 : (a > b) ? 1 : 0;
+    // })
+    // let arr = Array(34);
+    // for (let j = 0; j < keypoints.length; ++j) {
+    //   arr[j] = keypoints[j].position.x;
+    //   arr[j+1] = keypoints[j].position.y;
+    // }
+    // norm = math.norm(arr);
+    // var confidencesum = 0;
+    // for (let j = 0; j < keypoints.length; ++j) {
+    //   final[j] = keypoints[j].position.x / norm;
+    //   final[j+1] = keypoints[j].position.y / norm;
+    //   final[34 + j] = keypoints[j].score;
+    //   confidencesum += keypoints[j].score;
+    // }
+    // final[51] = confidencesum;
+  // }
 
-  return vec;
+  return final;
 }
-
-
 
 function weightedDistanceMatching(poseVector1, poseVector2) {
   // Weighted Matching for Pose Similarity;
