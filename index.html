@@ -1,13 +1,33 @@
 <!DOCTYPE html><html><head>
-  <script src="p5.js"></script>
-  <script src="ml5.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
-
+  <script src="ml5.min.js"></script>
+  <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+  <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
 </head>
 
 <body>
   <script src="sketch.js"></script>
-
+  <style>
+    #container {
+      margin: 0px auto;
+      width: 500px;
+      height: 375px;
+      border: 10px #333 solid;
+    }
+    #videoElement {
+      width: 500px;
+      height: 375px;
+      background-color: #666;
+    }
+    </style>
+  
+  <input type="file" id="input">
+  <div id="container">
+    <video autoplay="true" id="videoElement">
+    
+    </video>
+  </div>
 
 </body></html>
