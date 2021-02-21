@@ -5,40 +5,68 @@
   text-align: center;
 }
 
-.h1 {
+h1 {
    color: white;
-   text-align: center;
-   font-family:  "Times New Roman", Times, serif;
-   font-size: 100px;
+   text-align: left-center;
+   font-family: Helvetica, sans-serif, sans-serif;
+   font-size: 150px;
+   text-shadow: 6px 6px black;
 }
 
 .button {
-	    color: white;
-	    font-family:  "Times New Roman", Times, serif;
-	    background-color:#2929a3;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
+  padding: 14px 50px;
+  text-shadow: 3px 3px black;
+  position: absolute;
+  font-family:  Helvetica, sans-serif, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 50px;
+  /* identical to box height */
+  text-align: center;
+  letter-spacing: -0.05em;
+  height: 75px; 
+  left:99px;
+  color: white;
+  background-color: #A66BDE;
+  border-radius: 12px;
+  width: 10em;
 }
 
 .button:hover, .button:active {
-	                           color: white;
-	                           background-color:#cc99ff;
-	                           border: none;
-	                           color: white;
-	                           padding: 15px 32px;
-	                           text-align: center;
-	                           text-decoration: none;
-	                           display: inline-block;
- 	                           font-size: 16px;
-	                           margin: 4px 2px;
-	                           cursor: pointer;
+    border: 4px solid #FFFFFF;
+    box-sizing: border-box; 
 }
 	                         
-`
+body {
+	  background-image: url(https://lh3.googleusercontent.com/jC6ZiYP37hMn9_bDupwpGqA3vNIh2DiHRwR_KLxeWzdfgLIG7LgxdDdUTaSd75KGEOiRTB_6FXc0AYY2kvJ5g2Q3wKrSPtW3AopIUjjbkIZbP-6lf9vlQJUO0bikiC22Zk1KjGcKnXEPTDXaOTOmnDfDGp7_xCHvvJxWMP3PLhC48wxAsAAKrs969QzT0B1F3A8wafud9X-0oyDWWJBv6vY1o35Z08_ZulyzgDVPzOozQALTR9UvE9ztqG3ML-b2KOYsAalibVBX9bEnanKDm85jAq-adJsxOp5m-QsbOGePHrFPD6u3Q2bO0ddmoUjbk9xnoL53UQ0rPuwO3gfEOoSSi2hdygoHU4AmzyiJA44kbi6mGDf1KlO4ryLU2GdQioslprgWTopJ_5eq7PZ8Ze2MR9qnWopcooH9ZDIYpCg9zvyfHB6kQvlRBrGD5TBWjddI2zbOd8Ey0Dt-D01Kt-ygX_OfvWA6nChXMPl6US1r8xeNocWowwPlSyBgi_FrnARk7HEVLs3unYmKpuYdjot40CO2szGqSgD3U-Tt-YTcAIu0XHUZq-mR02AGVWwufrl_ITwDBazSQUDR-5u67J9JouCzWrby8QmS8pxDIOAdwRLBFQxMyshClX6vbwwg8sfBJEzT3Hr2wt5HOkSOzmxkfqaplQSxHqk3mo4elqVwotOXXDBb52GnnQfI=w1365-h707-no?authuser=0);
+	  background-size: cover;
+      background-position:50% 50%;
+	  background-repeat: no-repeat;
+      background-attachment: fixed;
+}
+
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
