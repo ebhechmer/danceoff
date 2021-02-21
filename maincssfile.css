@@ -5,22 +5,17 @@
   text-align: center;
 }
 
-.button {
-  width:
-  height:
-  
-  
-}
-
-h1 {
+.h1 {
    color: white;
    text-align: center;
    font-family:  "Times New Roman", Times, serif;
+   font-size: 100px;
 }
 
 .button {
 	    color: white;
-	    background-color:#a64dff;
+	    font-family:  "Times New Roman", Times, serif;
+	    background-color:#2929a3;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -47,4 +42,3 @@ h1 {
 }
 	                         
 `
-	                         
