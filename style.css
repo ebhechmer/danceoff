@@ -100,3 +100,9 @@ video {
     -webkit-transform:rotateY(180deg); /* Safari and Chrome */
     -moz-transform:rotateY(180deg); /* Firefox */
 }
+
+#container {
+      margin: 0px auto;
+      width: 1000px;
+      height: 375px;
+}
