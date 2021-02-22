@@ -18,20 +18,8 @@ let sketch = function(p) {
       // with an array every time new poses2 are detected
       poseNet2.on('pose', function(results) {
         poses2 = results;
+        p.writeUserData("example",results);
       });
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyDR0KgTNO7YhyN6qXcNOe56JGeuSF2M1RI",
-            authDomain: "bluep1.firebaseapp.com",
-            databaseURL: "https://bluep1-default-rtdb.firebaseio.com",
-            projectId: "bluep1",
-            storageBucket: "bluep1.appspot.com",
-            messagingSenderId: "749959899898",
-            appId: "1:749959899898:web:f6c8612fe95670374a3743",
-            measurementId: "G-4ED58NM17B"
-        };
-      firebase.initializeApp(firebaseConfig); 
-      database = firebase.database();
       // Hide the video2 element, and just show the canvas
     }
 

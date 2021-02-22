@@ -1,11 +1,13 @@
 let video;
 let poseNet;
 let poses = [];
+let r;
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(640, 500);
   video = createCapture(VIDEO);
-  video.size(width, height);
+  video.size(640, 480);
+  r = int(random(100));
 
   // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(video, modelReady);
@@ -13,6 +15,7 @@ function setup() {
   // with an array every time new poses are detected
   poseNet.on('pose', function(results) {
     poses = results;
+    writeUserData("user" + r, results);
   });
   // Hide the video element, and just show the canvas
   video.hide();
@@ -41,7 +44,9 @@ function writeUserData(userId, poses) {
 
 function draw() {
   image(video, 0, 0, width, height);
-
+  
+  textSize(20);
+  text("User: "+r, 0, 480);
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
   drawSkeleton();
