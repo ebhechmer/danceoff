@@ -4,7 +4,7 @@ let poses = [];
 let r;
 
 function setup() {
-  createCanvas(640, 500);
+  createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(640, 480);
   r = int(random(100));
