@@ -119,8 +119,13 @@ let poses2 = [];
 
 function setup() {
   createCanvas(640, 480);
-  video2 = createVideo('shuffling.mp4');
-  video2.size(width, height);
+  video2 = createVideo('shuffling.mp4', function(res) {
+      console.log(res);
+  });
+  video2.size(640, 480);
+  video2.volume(0);
+  video2.loop();
+  video2.hide(); // hides the html video loader
 
   // Create a new poseNet2 method with a single detection
   poseNet2 = ml5.poseNet(video2, modelReady);
@@ -130,7 +135,6 @@ function setup() {
     poses2 = results;
   });
   // Hide the video2 element, and just show the canvas
-  video2.hide();
 }
 
 function modelReady() {
@@ -138,7 +142,8 @@ function modelReady() {
 }
 
 function draw() {
-  image(video2, 0, 0, width, height);
+    let img = video2.get();
+  image(img, 640, 0, width, height);
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
