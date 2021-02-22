@@ -1,30 +1,36 @@
+let video2;
+let poseNet2;
+let poses2 = [];
 
-let video;
-let poseNet;
-let poses = [];
+var left, right;
 
 function setup() {
   createCanvas(640, 480);
-  video = createCapture(VIDEO);
-  video.size(width, height);
+  new p5(left, 'left')
+  new p5(right, 'left')
+  video2 = createVideo('shuffling.mp4');
+  video2.size(640, 480);
+  video2.volume(0);
+  video2.loop();
+  video2.hide(); // hides the html video loader
 
-  // Create a new poseNet method with a single detection
-  poseNet = ml5.poseNet(video, modelReady);
-  // This sets up an event that fills the global variable "poses"
-  // with an array every time new poses are detected
-  poseNet.on('pose', function(results) {
-    poses = results;
+  // Create a new poseNet2 method with a single detection
+  poseNet2 = ml5.poseNet(video2, modelReady);
+  // This sets up an event that fills the global variable "poses2"
+  // with an array every time new poses2 are detected
+  poseNet2.on('pose', function(results) {
+    poses2 = results;
   });
-  // Hide the video element, and just show the canvas
-  // video.hide();
+  // Hide the video2 element, and just show the canvas
 }
 
 function modelReady() {
-  console.log('ready');
+  console.log("model ready");
 }
 
 function draw() {
-  image(video, 0, 0, width, height);
+    let img = video2.get();
+  image(img, 0, 0);
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
@@ -33,10 +39,10 @@ function draw() {
 
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints()  {
-  // Loop through all the poses detected
-  for (let i = 0; i < poses.length; i++) {
+  // Loop through all the poses2 detected
+  for (let i = 0; i < poses2.length; i++) {
     // For each pose detected, loop through all the keypoints
-    let pose = poses[i].pose;
+    let pose = poses2[i].pose;
     for (let j = 0; j < pose.keypoints.length; j++) {
       // A keypoint is an object describing a body part (like rightArm or leftShoulder)
       let keypoint = pose.keypoints[j];
@@ -53,8 +59,8 @@ function drawKeypoints()  {
 // A function to draw the skeletons
 function drawSkeleton() {
   // Loop through all the skeletons detected
-  for (let i = 0; i < poses.length; i++) {
-    let skeleton = poses[i].skeleton;
+  for (let i = 0; i < poses2.length; i++) {
+    let skeleton = poses2[i].skeleton;
     // For every skeleton, loop through all body connections
     for (let j = 0; j < skeleton.length; j++) {
       let partA = skeleton[j][0];
@@ -120,37 +126,3 @@ function weightedDistanceMatching(poseVector1, poseVector2) {
 
   return summation1 * summation2;
 }
-
-// var leftBuffer;
-// var rightBuffer;
-
-// function setup() {
-//     // 800 x 400 (double width to make room for each "sub-canvas")
-//     createCanvas(800, 400);
-//     // Create both of your off-screen graphics buffers
-//     leftBuffer = createGraphics(400, 400);
-//     rightBuffer = createGraphics(400, 400);
-// }
-
-// function draw() {
-//     // Draw on your buffers however you like
-//     drawLeftBuffer();
-//     drawRightBuffer();
-//     // Paint the off-screen buffers onto the main canvas
-//     image(leftBuffer, 0, 0);
-//     image(rightBuffer, 400, 0);
-// }
-
-// function drawLeftBuffer() {
-//     leftBuffer.background(0, 0, 0);
-//     leftBuffer.fill(255, 255, 255);
-//     leftBuffer.textSize(32);
-//     leftBuffer.text("This is the left buffer!", 50, 50);
-// }
-
-// function drawRightBuffer() {
-//     rightBuffer.background(255, 100, 255);
-//     rightBuffer.fill(0, 0, 0);
-//     rightBuffer.textSize(32);
-//     rightBuffer.text("This is the right buffer!", 50, 50);
-// }
