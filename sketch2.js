@@ -143,7 +143,7 @@ function modelReady() {
 
 function draw() {
     let img = video2.get();
-  image(img, 640, 0, width, height);
+  image(img, 0, 0);
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
