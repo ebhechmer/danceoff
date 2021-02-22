@@ -1,7 +1,6 @@
 let video;
 let poseNet;
 let poses = [];
-let api_key = "AIzaSyB_kp9fqCR_qdUVVaAPNCBWUp3YpIIAHbU";
 
 function setup() {
   createCanvas(640, 480);
@@ -17,10 +16,27 @@ function setup() {
   });
   // Hide the video element, and just show the canvas
   video.hide();
+  const firebaseConfig = {
+    apiKey: "AIzaSyDR0KgTNO7YhyN6qXcNOe56JGeuSF2M1RI",
+    authDomain: "bluep1.firebaseapp.com",
+    databaseURL: "https://bluep1-default-rtdb.firebaseio.com",
+    projectId: "bluep1",
+    storageBucket: "bluep1.appspot.com",
+    messagingSenderId: "749959899898",
+    appId: "1:749959899898:web:f6c8612fe95670374a3743",
+    measurementId: "G-4ED58NM17B"
+  };
+  firebase.initializeApp(firebaseConfig); 
 }
 
 function modelReady() {
   console.log('ready');
+}
+
+function writeUserData(userId, poses) {
+  firebase.database().ref('users/' + userId).set({
+    poses: poses,
+  });
 }
 
 function draw() {
