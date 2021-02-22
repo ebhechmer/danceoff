@@ -5,7 +5,7 @@ let sketch = function(p) {
     
     p.setup = function() {
       p.createCanvas(640, 480);
-      video2 = createVideo('shuffling.mp4');
+      video2 = createVideo('./shuffling.mp4');
       video2.size(640, 480);
       video2.volume(0);
       video2.loop();
