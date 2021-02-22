@@ -1,7 +1,7 @@
-
 let video;
 let poseNet;
 let poses = [];
+let api_key = "AIzaSyB_kp9fqCR_qdUVVaAPNCBWUp3YpIIAHbU";
 
 function setup() {
   createCanvas(640, 480);

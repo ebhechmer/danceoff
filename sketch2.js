@@ -2,10 +2,11 @@ let sketch = function(p) {
     let video2;
     let poseNet2;
     let poses2 = [];
+    let api_key = "AIzaSyB_kp9fqCR_qdUVVaAPNCBWUp3YpIIAHbU";
     
     p.setup = function() {
       p.createCanvas(640, 480);
-      video2 = createVideo('shuffling.mp4');
+      video2 = createVideo('./shuffling.mp4');
       video2.size(640, 480);
       video2.volume(0);
       video2.loop();
