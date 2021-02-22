@@ -30,8 +30,8 @@ let sketch = function(p) {
       p.image(img, 0, 0);
     
       // We can call both functions to draw all keypoints and the skeletons
-      drawKeypoints();
-      drawSkeleton();
+      p.drawKeypoints();
+      p.drawSkeleton();
     }
     
     // A function to draw ellipses over the detected keypoints
@@ -45,9 +45,9 @@ let sketch = function(p) {
           let keypoint = pose.keypoints[j];
           // Only draw an ellipse is the pose probability is bigger than 0.2
           if (keypoint.score > 0.2) {
-            fill(255, 0, 0);
-            noStroke();
-            ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
+            p.fill(255, 0, 0);
+            p.noStroke();
+            p.ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
           }
         }
       }
@@ -62,8 +62,8 @@ let sketch = function(p) {
         for (let j = 0; j < skeleton.length; j++) {
           let partA = skeleton[j][0];
           let partB = skeleton[j][1];
-          stroke(255, 0, 0);
-          line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
+          p.stroke(255, 0, 0);
+          p.line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
         }
       }
     }
