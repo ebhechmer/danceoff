@@ -2,28 +2,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
-    margin: 0; /* Remove default margin */
+    min-height: 100vh;
+    margin: 0;
 }
 
-/* #video-container {
+#content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+}
+
+#video-container {
     position: relative;
     width: 640px; 
     height: 480px;
-} */
+}
 
 video, canvas {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center both video and canvas in their parent container */
+    top: 0;
+    left: 0;
 }
 
 canvas {
-    border: 2px solid black; /* Adds a border around the canvas */
-    z-index: 10; /* Ensures canvas is above the video */
+    border: 2px solid black;
+    z-index: 10;
 }
+
+#score-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    z-index: 20;
+}
+
