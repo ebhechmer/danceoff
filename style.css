@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+/* #video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 640px; 
+    height: 480px;
+} */
+
+video, canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both video and canvas in their parent container */
+}
+
+canvas {
+    border: 2px solid black; /* Adds a border around the canvas */
+    z-index: 10; /* Ensures canvas is above the video */
+}
